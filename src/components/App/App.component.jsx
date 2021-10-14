@@ -6,8 +6,9 @@ import HomePage from '../../pages/Home';
 import LoginPage from '../../pages/Login';
 import NotFound from '../../pages/NotFound';
 import SecretPage from '../../pages/Secret';
+import MainPage from '../../pages/Main';
 import Private from '../Private';
-import Fortune from '../Fortune';
+// import Fortune from '../Fortune';
 import Layout from '../Layout';
 import { random } from '../../utils/fns';
 
@@ -44,11 +45,14 @@ function App() {
             <Private exact path="/secret">
               <SecretPage />
             </Private>
+            <Private exact path="/main">
+              <MainPage />
+            </Private>
             <Route path="*">
               <NotFound />
             </Route>
           </Switch>
-          <Fortune />
+          {/* <Fortune /> */}
         </Layout>
       </AuthProvider>
     </BrowserRouter>
