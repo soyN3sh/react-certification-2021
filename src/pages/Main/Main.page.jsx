@@ -131,7 +131,7 @@ const Content = () => {
       {data.items &&
         data.items.length > 0 &&
         data.items.map((item) => (
-          <Grid item>
+          <Grid item key={item.etag}>
             <Card sx={{ maxWidth: 345, maxHeight: 345, width: 345, height: 345 }}>
               <CardMedia
                 component="img"
