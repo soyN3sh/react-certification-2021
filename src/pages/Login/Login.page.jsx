@@ -12,7 +12,6 @@ function LoginPage() {
     event.preventDefault();
     login();
     history.push('/secret');
-    history.push('/main');
   }
 
   return (
