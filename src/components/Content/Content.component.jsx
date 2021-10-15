@@ -3,26 +3,23 @@ import Grid from '@mui/material/Grid';
 import VideoCard from '../VideoCard/VideoCard.component';
 
 const Content = () => {
-  const [data, setData] = useState([]);
-  const getData = () => {
-    fetch('youtube-videos-mock.json', {
+  const [data, setData] = useState(null);
+  const getData = async () => {
+    const response = await fetch('youtube-videos-mock.json', {
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
       },
-    })
-      .then((response) => {
-        return response.json();
-      })
-      .then((myJson) => {
-        setData(myJson);
-      });
+    });
+
+    const json = await response.json();
+    setData(json);
   };
 
   useEffect(() => {
     getData();
   }, []);
-  return (
+  return data ? (
     <Grid
       container
       direction="row"
@@ -32,13 +29,14 @@ const Content = () => {
       sx={{ padding: '12px' }}
     >
       {data.items &&
-        data.items.length > 0 &&
         data.items.map((item) => (
           <Grid item key={item.etag}>
             <VideoCard data={item} />
           </Grid>
         ))}
     </Grid>
+  ) : (
+    'loading'
   );
 };
 
