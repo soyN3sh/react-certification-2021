@@ -25,7 +25,7 @@ const testData = {
   },
 };
 
-it('render dark mode label', () => {
+it('render Wizeline title on a card', () => {
   render(<VideoCard data={testData} />);
   expect(screen.getByText('Wizeline')).toBeInTheDocument();
 });

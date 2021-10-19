@@ -30,12 +30,6 @@ const fakeVideo = {
   ],
 };
 
-// global.fetch = jest.fn(() =>
-//   Promise.resolve({
-//     json: () => Promise.resolve(),
-//   })
-// );
-
 describe('App tests', () => {
   beforeEach(() => {
     jest.spyOn(global, 'fetch').mockImplementation(() =>
@@ -54,19 +48,3 @@ describe('App tests', () => {
     expect(screen.getByText('Wizeline')).toBeInTheDocument();
   });
 });
-
-// it('render home page', async () => {
-//   jest.spyOn(global, 'fetch').mockImplementation(() =>
-//     Promise.resolve({
-//       json: () => Promise.resolve(fakeVideo),
-//     })
-//   );
-
-//   await act(async () => {
-//     render(<HomePage />);
-//   });
-//   expect(screen.getByLabelText('open drawer')).toBeInTheDocument();
-//   expect(screen.getByText('Dark mode')).toBeInTheDocument();
-//   expect(screen.getByPlaceholderText('wizeline')).toBeInTheDocument();
-//   await expect(screen.getByText('Wizeline')).toBeInTheDocument();
-// });
