@@ -1,3 +1,3 @@
-const AUTH_STORAGE_KEY = 'wa_cert_authenticated';
+const { AUTH_STORAGE_KEY, API_KEY } = process.env;
 
-export { AUTH_STORAGE_KEY };
+export { AUTH_STORAGE_KEY, API_KEY };

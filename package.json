@@ -68,6 +68,15 @@
     }
   },
   "jest": {
-    "coveragePathIgnorePatterns": ["src/components/Private", "/src/components/Fortune", "/src/pages/Login", "/src/pages/NotFound", "src/pages/Secret", "src/providers/Auth", "src/utils/storage.js", "src/utils/hooks/useFortune.js"]
+    "coveragePathIgnorePatterns": [
+      "src/components/Private",
+      "/src/components/Fortune",
+      "/src/pages/Login",
+      "/src/pages/NotFound",
+      "src/pages/Secret",
+      "src/providers/Auth",
+      "src/utils/storage.js",
+      "src/utils/hooks/useFortune.js"
+    ]
   }
 }
