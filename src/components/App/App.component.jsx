@@ -53,21 +53,16 @@ function App() {
     <BrowserRouter>
       <AuthProvider>
         <Layout>
+          <MyAppBar
+            query={query}
+            handleQuery={handleQuery}
+            handleKeyDown={handleKeyDown}
+          />
           <Switch>
             <Route exact path="/">
-              <MyAppBar
-                query={query}
-                handleQuery={handleQuery}
-                handleKeyDown={handleKeyDown}
-              />
               <HomePage data={data} setVideo={setVideo} />
             </Route>
             <Route exact path="/video-detail">
-              <MyAppBar
-                query={query}
-                handleQuery={handleQuery}
-                handleKeyDown={handleKeyDown}
-              />
               <StyledVideoDetail video={video} setVideo={setVideo} />
             </Route>
             <Route path="*">
