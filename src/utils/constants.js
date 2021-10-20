@@ -1,3 +1,3 @@
-const { AUTH_STORAGE_KEY, API_KEY } = process.env;
+const { REACT_APP_AUTH_STORAGE_KEY, REACT_APP_API_KEY } = process.env;
 
-export { AUTH_STORAGE_KEY, API_KEY };
+export { REACT_APP_AUTH_STORAGE_KEY, REACT_APP_API_KEY };

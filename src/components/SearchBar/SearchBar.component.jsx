@@ -2,13 +2,19 @@ import React from 'react';
 import SearchIcon from '@mui/icons-material/Search';
 import { Search, SearchIconWrapper, StyledInputBase } from './SearchBar.styles';
 
-const SearchBar = () => {
+const SearchBar = ({ query, handleQuery, handleKeyDown }) => {
   return (
     <Search>
       <SearchIconWrapper>
         <SearchIcon />
       </SearchIconWrapper>
-      <StyledInputBase placeholder="wizeline" inputProps={{ 'aria-label': 'search' }} />
+      <StyledInputBase
+        value={query}
+        placeholder="Search..."
+        inputProps={{ 'aria-label': 'search' }}
+        onChange={handleQuery}
+        onKeyDown={handleKeyDown}
+      />
     </Search>
   );
 };

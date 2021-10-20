@@ -1,8 +1,9 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import VideoCard from '../components/VideoCard/VideoCard.component';
 
-const testData = {
+import StyledVideoDetail from '../pages/VideoDetail/VideoDetail.page';
+
+const video = {
   kind: 'youtube#searchResult',
   etag: 'uyV-xf8yG6xa2tQKagAt55iBXnw',
   id: {
@@ -38,8 +39,8 @@ const testData = {
   },
 };
 
-it('render Wizeline title on a card', () => {
-  render(<VideoCard data={testData} />);
+it('renders title for selected video', () => {
+  render(<StyledVideoDetail video={video} />);
   expect(
     screen.getByText('Video Tour | Welcome to Wizeline Guadalajara')
   ).toBeInTheDocument();
