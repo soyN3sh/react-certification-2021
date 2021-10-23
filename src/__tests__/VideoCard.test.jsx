@@ -1,6 +1,15 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import VideoCard from '../components/VideoCard/VideoCard.component';
+
+const mockHistoryPush = jest.fn();
+
+jest.mock('react-router', () => ({
+  ...jest.requireActual('react-router'),
+  useHistory: () => ({
+    push: mockHistoryPush,
+  }),
+}));
 
 const testData = {
   kind: 'youtube#searchResult',
@@ -40,7 +49,17 @@ const testData = {
 
 it('render Wizeline title on a card', () => {
   render(<VideoCard data={testData} />);
-  expect(
-    screen.getByText('Video Tour | Welcome to Wizeline Guadalajara')
-  ).toBeInTheDocument();
+
+  const videoCard = screen.getByText('Video Tour | Welcome to Wizeline Guadalajara');
+  expect(videoCard).toBeInTheDocument();
+});
+
+it('handle click on cardActionArea', () => {
+  render(<VideoCard data={testData} />);
+
+  const videoCard = screen.getByText('Video Tour | Welcome to Wizeline Guadalajara');
+
+  fireEvent.click(videoCard);
+
+  expect(mockHistoryPush).toHaveBeenCalledWith(`/video-detail/${testData.id.videoId}`);
 });

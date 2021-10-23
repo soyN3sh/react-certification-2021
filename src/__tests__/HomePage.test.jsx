@@ -1,5 +1,6 @@
 import React from 'react';
-import { render, screen, act } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import { act } from 'react-dom/test-utils';
 
 import HomePage from '../pages/Home/Home.page';
 
@@ -41,7 +42,7 @@ const fakeVideo = [
   },
 ];
 
-describe('HomePage tests', () => {
+describe('HomePage resolve tests', () => {
   beforeEach(() => {
     jest.spyOn(global, 'fetch').mockImplementation(() =>
       Promise.resolve({
@@ -56,5 +57,20 @@ describe('HomePage tests', () => {
     expect(
       screen.getByText('Video Tour | Welcome to Wizeline Guadalajara')
     ).toBeInTheDocument();
+  });
+});
+
+describe('HomePage reject tests', () => {
+  beforeEach(() => {
+    jest
+      .spyOn(global, 'fetch')
+      .mockImplementation(() => Promise.reject(new Error('Failed')));
+  });
+
+  it('Renders async data', async () => {
+    await act(async () => {
+      render(<HomePage data={fakeVideo} />);
+    });
+    expect(screen.getByText('loading')).toBeInTheDocument();
   });
 });

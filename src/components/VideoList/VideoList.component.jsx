@@ -1,35 +1,29 @@
-import React, { Fragment } from 'react';
-import { useHistory } from 'react-router';
-import { Typography, Divider } from '@mui/material';
-import {
-  DivListVideo,
-  DivListItem,
-  ImgVideo,
-  VideoListDetails,
-} from './VideoList.styles';
+import React from 'react';
+import Grid from '@mui/material/Grid';
+import VideoItem from '../VideoItem/VideoItem.component';
 
-const VideoList = ({ data, setVideo }) => {
-  const history = useHistory();
+const VideoList = ({ data }) => {
+  const filteredData = data.filter((item) => item.snippet !== undefined);
 
-  const handleClick = (video) => {
-    setVideo(video);
-    history.push('/video-detail');
-  };
-
-  return data ? (
-    <DivListVideo>
-      {data.map((video) => (
-        <Fragment key={video.id.videoId}>
-          <DivListItem onClick={() => handleClick(video)}>
-            <ImgVideo src={video.snippet.thumbnails.medium.url} alt="image" />
-            <VideoListDetails>
-              <Typography>{video.snippet.title}</Typography>
-            </VideoListDetails>
-          </DivListItem>
-          <Divider />
-        </Fragment>
+  return filteredData ? (
+    <Grid
+      container
+      direction="column"
+      spacing={1}
+      sx={{
+        width: '30%',
+        height: '100%',
+        overflow: 'scroll',
+        padding: '16px',
+        flexWrap: 'nowrap',
+      }}
+    >
+      {filteredData.map((video) => (
+        <Grid item key={video.id.videoId}>
+          <VideoItem video={video} />
+        </Grid>
       ))}
-    </DivListVideo>
+    </Grid>
   ) : (
     'loading'
   );
