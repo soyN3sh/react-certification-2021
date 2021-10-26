@@ -1,6 +1,6 @@
 export const actions = {
   setQuery: 'setQuery',
   setApiParams: 'setApiParams',
-  setToggleMode: 'setToggleMode',
-  setIsDrawerOpen: 'setIsDrawerOpen',
+  toggleDarkMode: 'toggleDarkMode',
+  toggleDrawer: 'toggleDrawer',
 };

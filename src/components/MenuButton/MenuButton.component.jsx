@@ -12,7 +12,7 @@ const MenuButton = () => {
   } = useContext(GlobalContext);
 
   const toggleDrawer = () => {
-    dispatch({ type: actions.setIsDrawerOpen, payload: !isDrawerOpen });
+    dispatch({ type: actions.toggleDrawer, payload: !isDrawerOpen });
   };
 
   return (

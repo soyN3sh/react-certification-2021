@@ -32,16 +32,10 @@ describe('ModeSwitch tests', () => {
 
     const modeSwitch = document.querySelector('#modeSwitch');
 
-    fireEvent(
-      modeSwitch,
-      new MouseEvent('click', {
-        bubbles: true,
-        cancelable: true,
-      })
-    );
+    fireEvent.click(modeSwitch);
 
     expect(dispatchMock).toHaveBeenCalledWith({
-      type: actions.setToggleMode,
+      type: actions.toggleDarkMode,
       payload: true,
     });
   });

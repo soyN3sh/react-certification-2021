@@ -2,26 +2,26 @@ import { reducer } from '../utils/reducer/reducer';
 import { actions } from '../utils/reducer/actions';
 
 describe('reducer tests', () => {
-  it('test setToggleMode', () => {
+  it('test toggleDarkMode', () => {
     const initialState = {
       toggleMode: false,
     };
 
     const newState = reducer(initialState, {
-      type: actions.setToggleMode,
+      type: actions.toggleDarkMode,
       payload: true,
     });
 
     expect(newState.toggleMode).toBeTruthy();
   });
 
-  it('test setIsDrawerOpen', () => {
+  it('test toggleDrawer', () => {
     const initialState = {
       isDrawerOpen: false,
     };
 
     const newState = reducer(initialState, {
-      type: actions.setIsDrawerOpen,
+      type: actions.toggleDrawer,
       payload: true,
     });
 

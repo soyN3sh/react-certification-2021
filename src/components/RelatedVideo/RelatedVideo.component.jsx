@@ -2,7 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router';
 import { Card, CardActionArea, CardMedia, CardContent, Typography } from '@mui/material';
 
-const VideoItem = ({ video }) => {
+const RelatedVideo = ({ video }) => {
   const { thumbnails, title } = video.snippet;
 
   const history = useHistory();
@@ -42,4 +42,4 @@ const VideoItem = ({ video }) => {
   );
 };
 
-export default VideoItem;
+export default RelatedVideo;

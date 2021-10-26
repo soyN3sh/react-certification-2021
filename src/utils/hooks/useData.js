@@ -16,7 +16,7 @@ const useData = (endpoint, params) => {
         setData(items);
         setLoading(false);
       } catch (error) {
-        console.error('Bad request: ', error);
+        console.log('Oops! Something went wrong...');
         setLoading(false);
       }
     };

@@ -4,7 +4,8 @@ import Typography from '@mui/material/Typography';
 import { useParams } from 'react-router-dom';
 import useData from '../../utils/hooks/useData';
 import { Container, VideoContainer, DetailsContainer } from './VideoDetail.styles';
-import VideoList from '../../components/VideoList/VideoList.component';
+import RelatedVideosList from '../../components/RelatedVideosList/RelatedVideosList.component';
+import DescriptionAccordion from '../../components/DescriptionAccordion';
 
 const VideoDetail = () => {
   const params = useParams();
@@ -45,12 +46,10 @@ const VideoDetail = () => {
           <Typography gutterBottom variant="h6" component="h2">
             {title}
           </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            {description}
-          </Typography>
+          <DescriptionAccordion description={description} />
         </DetailsContainer>
       </VideoContainer>
-      {!relatedVideos.loading && <VideoList data={relatedVideos.data} />}
+      {!relatedVideos.loading && <RelatedVideosList data={relatedVideos.data} />}
     </Container>
   );
 };

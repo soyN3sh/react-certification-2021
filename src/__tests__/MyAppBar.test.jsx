@@ -6,7 +6,13 @@ import MyAppBar from '../components/MyAppBar/MyAppBar.component';
 
 describe('MyAppBar tests', () => {
   const initialState = {
-    toggleMode: false,
+    state: {
+      toggleMode: false,
+      apiParams: {
+        q: 'wizeline',
+      },
+    },
+    dispatch: jest.fn(),
   };
 
   const MyAppBarWithContext = ({ state }) => {

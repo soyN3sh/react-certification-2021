@@ -37,7 +37,7 @@ describe('MenuButton tests', () => {
     fireEvent.click(menuButton);
 
     expect(mockDispatch).toHaveBeenCalledWith({
-      type: actions.setIsDrawerOpen,
+      type: actions.toggleDrawer,
       payload: true,
     });
   });

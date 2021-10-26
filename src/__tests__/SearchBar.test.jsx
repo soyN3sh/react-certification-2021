@@ -58,6 +58,15 @@ describe('SearchBar tests', () => {
       type: actions.setQuery,
       payload: 'mock value',
     });
+
+    const searchButton = document.querySelector('#searchButton');
+
+    fireEvent.click(searchButton);
+
+    expect(dispatchMock).toHaveBeenCalledWith({
+      type: actions.setQuery,
+      payload: 'mock value',
+    });
   });
 
   it('dispach wont get called when hitting other key', () => {

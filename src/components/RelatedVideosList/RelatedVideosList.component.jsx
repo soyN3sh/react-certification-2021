@@ -1,12 +1,13 @@
 import React from 'react';
 import Grid from '@mui/material/Grid';
-import VideoItem from '../VideoItem/VideoItem.component';
+import RelatedVideo from '../RelatedVideo/RelatedVideo.component';
 
-const VideoList = ({ data }) => {
+const RelatedVideosList = ({ data }) => {
   const filteredData = data.filter((item) => item.snippet !== undefined);
 
   return filteredData ? (
     <Grid
+      id="relatedVideosListContainer"
       container
       direction="column"
       spacing={1}
@@ -20,7 +21,7 @@ const VideoList = ({ data }) => {
     >
       {filteredData.map((video) => (
         <Grid item key={video.id.videoId}>
-          <VideoItem video={video} />
+          <RelatedVideo video={video} />
         </Grid>
       ))}
     </Grid>
@@ -29,4 +30,4 @@ const VideoList = ({ data }) => {
   );
 };
 
-export default VideoList;
+export default RelatedVideosList;

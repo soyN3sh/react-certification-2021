@@ -10,7 +10,7 @@ const ModeSwitch = () => {
   } = useContext(GlobalContext);
 
   const handleModeChange = () => {
-    dispatch({ type: actions.setToggleMode, payload: !toggleMode });
+    dispatch({ type: actions.toggleDarkMode, payload: !toggleMode });
   };
 
   return (

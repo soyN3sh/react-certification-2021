@@ -50,8 +50,8 @@ const mockFetch = (mockData) => {
   );
 };
 
-const mockFetchError = (error) => {
-  global.fetch = jest.fn().mockImplementation(() => Promise.reject(error));
+const mockFetchError = () => {
+  global.fetch = jest.fn().mockImplementation(() => Promise.reject());
 };
 
 const mockFetchCleanUp = () => {
@@ -78,7 +78,7 @@ describe('useData async tests', () => {
   });
 
   it('error', async () => {
-    mockFetchError('Network Error');
+    mockFetchError();
     const { result, waitForNextUpdate } = renderHook(() => useData(endpoint, apiParams));
     await waitForNextUpdate();
     expect(result.current.data).toBeNull();

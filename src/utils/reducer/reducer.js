@@ -2,9 +2,9 @@ import { actions } from './actions';
 
 export const reducer = (state, action) => {
   switch (action.type) {
-    case actions.setToggleMode:
+    case actions.toggleDarkMode:
       return { ...state, toggleMode: action.payload };
-    case actions.setIsDrawerOpen:
+    case actions.toggleDrawer:
       return { ...state, isDrawerOpen: action.payload };
     case actions.setQuery:
       return { ...state, apiParams: { ...state.apiParams, q: action.payload } };

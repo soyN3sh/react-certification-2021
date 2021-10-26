@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import VideoList from '../components/VideoList/VideoList.component';
+import RelatedVideosList from '../components/RelatedVideosList/RelatedVideosList.component';
 
 const testData = [
   {
@@ -50,8 +50,8 @@ const testData = [
   },
 ];
 
-it('VideoList renders correctly', () => {
-  render(<VideoList data={testData} />);
+it('RelatedVideosList renders correctly', () => {
+  render(<RelatedVideosList data={testData} />);
 
   expect(
     screen.getByText('I Went To the Wrong Hood In Mexico City 🇲🇽')

@@ -9,7 +9,7 @@ const mockDispatch = jest.fn();
 jest.mock('react-router', () => ({
   ...jest.requireActual('react-router'),
   useHistory: () => ({
-    push: mockDispatch,
+    push: jest.fn(),
   }),
 }));
 
@@ -18,7 +18,6 @@ describe('MenuList tests', () => {
     state: {
       isDrawerOpen: false,
     },
-    dispatch: jest.fn(),
   };
 
   const MenuListWithContext = ({ state, dispatch }) => {
@@ -39,13 +38,13 @@ describe('MenuList tests', () => {
     const state = initialState;
     render(<MenuListWithContext state={state} dispatch={mockDispatch} />);
 
-    const menuList = screen.getByText('Home');
+    const homeOption = screen.getByText('Home');
 
-    fireEvent.click(menuList);
+    fireEvent.click(homeOption);
 
     expect(mockDispatch).toHaveBeenCalledWith({
-      type: actions.setIsDrawerOpen,
-      payload: true,
+      type: actions.toggleDrawer,
+      payload: false,
     });
   });
 });
