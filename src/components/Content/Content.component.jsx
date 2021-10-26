@@ -2,9 +2,10 @@ import React from 'react';
 import Grid from '@mui/material/Grid';
 import VideoCard from '../VideoCard/VideoCard.component';
 
-const Content = ({ data, setVideo }) => {
+const Content = ({ data }) => {
   return data ? (
     <Grid
+      id="videoCardsContainer"
       container
       direction="row"
       justifyContent="center"
@@ -14,7 +15,7 @@ const Content = ({ data, setVideo }) => {
     >
       {data.map((item) => (
         <Grid item key={item.id.videoId}>
-          <VideoCard data={item} setVideo={setVideo} />
+          <VideoCard data={item} />
         </Grid>
       ))}
     </Grid>

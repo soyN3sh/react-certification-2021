@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import VideoCard from '../components/VideoCard/VideoCard.component';
+import RelatedVideo from '../components/RelatedVideo/RelatedVideo.component';
 
 const mockHistoryPush = jest.fn();
 
@@ -11,7 +11,7 @@ jest.mock('react-router', () => ({
   }),
 }));
 
-const testData = {
+const testVideo = {
   kind: 'youtube#searchResult',
   etag: 'uyV-xf8yG6xa2tQKagAt55iBXnw',
   id: {
@@ -47,19 +47,22 @@ const testData = {
   },
 };
 
-it('render Wizeline title on a card', () => {
-  render(<VideoCard data={testData} />);
+describe('RelatedVideo tests', () => {
+  it('RelatedVideo renders correctly', () => {
+    render(<RelatedVideo video={testVideo} />);
 
-  const videoCard = screen.getByText('Video Tour | Welcome to Wizeline Guadalajara');
-  expect(videoCard).toBeInTheDocument();
-});
+    const relatedVideo = screen.getByText('Video Tour | Welcome to Wizeline Guadalajara');
 
-it('handle click on cardActionArea', () => {
-  render(<VideoCard data={testData} />);
+    expect(relatedVideo).toBeInTheDocument();
+  });
 
-  const videoCard = screen.getByText('Video Tour | Welcome to Wizeline Guadalajara');
+  it('handle click on cardActionArea', () => {
+    render(<RelatedVideo video={testVideo} />);
 
-  fireEvent.click(videoCard);
+    const relatedVideo = screen.getByText('Video Tour | Welcome to Wizeline Guadalajara');
 
-  expect(mockHistoryPush).toHaveBeenCalledWith(`/video-detail/${testData.id.videoId}`);
+    fireEvent.click(relatedVideo);
+
+    expect(mockHistoryPush).toHaveBeenCalledWith(`/video-detail/${testVideo.id.videoId}`);
+  });
 });

@@ -2,28 +2,25 @@ import React from 'react';
 import { Card, CardActionArea, CardMedia, CardContent, Typography } from '@mui/material';
 import { useHistory } from 'react-router';
 
-const VideoCard = ({ data, setVideo }) => {
+const VideoCard = ({ data }) => {
+  const { thumbnails, title, description } = data.snippet;
+
   const history = useHistory();
 
   const handleClick = () => {
-    setVideo(data);
-    history.push('/video-detail');
+    history.push(`/video-detail/${data.id.videoId}`);
   };
 
   return (
     <Card sx={{ maxWidth: 345, maxHeight: 345, width: 345, height: 345 }}>
-      <CardActionArea onClick={handleClick}>
-        <CardMedia
-          component="img"
-          height="140"
-          image={data.snippet.thumbnails.medium.url}
-        />
+      <CardActionArea id="cardActionArea" onClick={handleClick}>
+        <CardMedia component="img" height="140" image={thumbnails.medium.url} />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            {data.snippet.title}
+            {title}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {data.snippet.description}
+            {description}
           </Typography>
         </CardContent>
       </CardActionArea>

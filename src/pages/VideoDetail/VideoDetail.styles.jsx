@@ -13,6 +13,7 @@ const VideoContainer = styled('div')(() => ({
   position: 'relative',
   display: 'flex',
   flexDirection: 'column',
+  padding: '16px',
 }));
 
 const DetailsContainer = styled('div')(() => ({

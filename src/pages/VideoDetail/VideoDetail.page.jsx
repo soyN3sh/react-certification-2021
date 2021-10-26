@@ -1,35 +1,55 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
-import { useData } from '../../utils/hooks/useData';
-import { REACT_APP_API_KEY } from '../../utils/constants';
+import { useParams } from 'react-router-dom';
+import useData from '../../utils/hooks/useData';
 import { Container, VideoContainer, DetailsContainer } from './VideoDetail.styles';
-import VideoList from '../../components/VideoList/VideoList.component';
+import RelatedVideosList from '../../components/RelatedVideosList/RelatedVideosList.component';
+import DescriptionAccordion from '../../components/DescriptionAccordion';
 
-const VideoDetail = ({ video, setVideo }) => {
-  const YOUTUBE_RELATED_API_URL = `https://youtube.googleapis.com/youtube/v3/search?part=id&part=snippet&maxResults=25&relatedToVideoId=${video.id.videoId}&type=video&key=${REACT_APP_API_KEY}`;
+const VideoDetail = () => {
+  const params = useParams();
 
-  const { data } = useData(YOUTUBE_RELATED_API_URL);
+  const [apiParamsInfoVideo, setApiParamsInfoVideo] = useState({
+    id: params.videoId,
+  });
+
+  const [apiParamsRelatedVideos, setApiParamsRelatedVideos] = useState({
+    relatedToVideoId: params.videoId,
+    maxResults: 25,
+    type: 'video',
+  });
+
+  const infoVideo = useData('videos', apiParamsInfoVideo);
+  const relatedVideos = useData('search', apiParamsRelatedVideos);
+
+  const { title, description } = !infoVideo.loading && infoVideo.data[0].snippet;
+
+  useEffect(() => {
+    setApiParamsInfoVideo({ id: params.videoId });
+    setApiParamsRelatedVideos((current) => {
+      return { ...current, relatedToVideoId: params.videoId };
+    });
+  }, [params.videoId]);
 
   return (
     <Container>
       <VideoContainer>
         <iframe
-          title="video"
+          id="youtubeVideo"
+          title="youtubeVideo"
           width="100%"
           height="500px"
-          src={`https://www.youtube.com/embed/${video.id.videoId}`}
+          src={`https://www.youtube.com/embed/${params.videoId}`}
         />
         <DetailsContainer>
-          <Typography gutterBottom variant="h5" component="div">
-            {video.snippet.title}
+          <Typography gutterBottom variant="h6" component="h2">
+            {title}
           </Typography>
-          <Typography variant="body2" color="text.secondary">
-            {video.snippet.description}
-          </Typography>
+          <DescriptionAccordion description={description} />
         </DetailsContainer>
       </VideoContainer>
-      <VideoList data={data} setVideo={setVideo} />
+      {!relatedVideos.loading && <RelatedVideosList data={relatedVideos.data} />}
     </Container>
   );
 };

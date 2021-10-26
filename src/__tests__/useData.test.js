@@ -1,8 +1,12 @@
-import React from 'react';
-import { render } from '@testing-library/react';
 import { renderHook } from '@testing-library/react-hooks';
 import useData from '../utils/hooks/useData';
-import StyledVideoDetail from '../pages/VideoDetail/VideoDetail.page';
+
+const endpoint = 'wizeline';
+const apiParams = {
+  q: 'wizeline',
+  maxResults: 25,
+  type: 'video',
+};
 
 const mockDataFetch = {
   items: [
@@ -46,11 +50,8 @@ const mockFetch = (mockData) => {
   );
 };
 
-const endpoint = 'search';
-const apiParams = {
-  relatedToVideoId: 'nmXMgqjQzls',
-  maxResults: 25,
-  type: 'video',
+const mockFetchError = () => {
+  global.fetch = jest.fn().mockImplementation(() => Promise.reject());
 };
 
 const mockFetchCleanUp = () => {
@@ -58,28 +59,29 @@ const mockFetchCleanUp = () => {
   delete global.fetch;
 };
 
-jest.mock('react-router', () => ({
-  ...jest.requireActual('react-router'),
-  useParams: () => ({
-    params: {
-      videoId: 'nmXMgqjQzls',
-    },
-  }),
-}));
+it('default state', () => {
+  const { result } = renderHook(() => useData(endpoint, apiParams));
+  expect(result.current.data).toStrictEqual(null);
+});
 
-it('renders title for selected video and async data for related videos', async () => {
-  render(<StyledVideoDetail />);
-
-  mockFetch(mockDataFetch);
-  const { result, waitForNextUpdate } = renderHook(() => useData(endpoint, apiParams));
-  expect(result.current).toMatchObject({
-    data: null,
-    loading: true,
+describe('useData async tests', () => {
+  it('loads data', async () => {
+    mockFetch(mockDataFetch);
+    const { result, waitForNextUpdate } = renderHook(() => useData(endpoint, apiParams));
+    expect(result.current).toMatchObject({
+      data: null,
+      loading: true,
+    });
+    await waitForNextUpdate();
+    expect(result.current.data).toMatchObject(mockDataFetch.items);
+    mockFetchCleanUp();
   });
-  await waitForNextUpdate();
-  expect(result.current.data).toMatchObject(mockDataFetch.items);
-  mockFetchCleanUp();
 
-  const youtubeVideo = document.querySelector('#youtubeVideo');
-  expect(youtubeVideo).toHaveAttribute('title', 'youtubeVideo');
+  it('error', async () => {
+    mockFetchError();
+    const { result, waitForNextUpdate } = renderHook(() => useData(endpoint, apiParams));
+    await waitForNextUpdate();
+    expect(result.current.data).toBeNull();
+    mockFetchCleanUp();
+  });
 });
