@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { styled } from '@mui/material/styles';
 import { Button, Typography } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import useData from '../../utils/hooks/useData';
@@ -8,14 +7,14 @@ import {
   VideoContainer,
   DetailsContainer,
   DetailsHeader,
-} from './VideoDetail.styles';
-import RelatedVideosList from '../../components/RelatedVideosList/RelatedVideosList.component';
+} from './FavoriteVideoDetail.styles';
+import FavoriteRelatedVideosList from '../../components/FavoriteRelatedVideosList/FavoriteRelatedVideosList.component';
 import DescriptionAccordion from '../../components/DescriptionAccordion';
 import GlobalContext from '../../providers/Global/GlobalContext';
 import { actions } from '../../utils/reducer/actions';
 import { storage } from '../../utils/storage';
 
-const VideoDetail = () => {
+const FavoriteVideoDetail = () => {
   const {
     state: { user, favoriteVideos },
     dispatch,
@@ -25,6 +24,9 @@ const VideoDetail = () => {
 
   const isFavoriteVideo = (video) => {
     return favoriteVideos.find((favoriteVideo) => {
+      if (favoriteVideo.id.videoId) {
+        return favoriteVideo.id.videoId === video.id;
+      }
       return favoriteVideo.id === video.id;
     });
   };
@@ -33,22 +35,12 @@ const VideoDetail = () => {
     id: params.videoId,
   });
 
-  const [apiParamsRelatedVideos, setApiParamsRelatedVideos] = useState({
-    relatedToVideoId: params.videoId,
-    maxResults: 25,
-    type: 'video',
-  });
-
   const infoVideo = useData('videos', apiParamsInfoVideo);
-  const relatedVideos = useData('search', apiParamsRelatedVideos);
 
   const { title, description } = !infoVideo.loading && infoVideo.data[0].snippet;
 
   useEffect(() => {
     setApiParamsInfoVideo({ id: params.videoId });
-    setApiParamsRelatedVideos((current) => {
-      return { ...current, relatedToVideoId: params.videoId };
-    });
   }, [params.videoId]);
 
   return (
@@ -78,8 +70,10 @@ const VideoDetail = () => {
                     });
                     storage.set(
                       'favoriteVideos',
-                      tmpFavoriteVideos.filter(
-                        (video) => video.id !== infoVideo.data[0].id
+                      tmpFavoriteVideos.filter((video) =>
+                        video.id.videoId
+                          ? video.id.videoId
+                          : video.id !== infoVideo.data[0].id
                       )
                     );
                   }}
@@ -104,11 +98,9 @@ const VideoDetail = () => {
           <DescriptionAccordion description={description} />
         </DetailsContainer>
       </VideoContainer>
-      {!relatedVideos.loading && <RelatedVideosList data={relatedVideos.data} />}
+      <FavoriteRelatedVideosList data={favoriteVideos} />
     </Container>
   );
 };
 
-const StyledVideoDetail = styled(VideoDetail)(() => ({}));
-
-export default StyledVideoDetail;
+export default FavoriteVideoDetail;

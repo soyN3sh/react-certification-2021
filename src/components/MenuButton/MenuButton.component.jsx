@@ -16,7 +16,7 @@ const MenuButton = () => {
   };
 
   return (
-    <>
+    <div>
       <IconButton
         size="large"
         edge="start"
@@ -30,7 +30,7 @@ const MenuButton = () => {
       <Drawer anchor="left" open={isDrawerOpen} onClose={toggleDrawer}>
         <MenuList />
       </Drawer>
-    </>
+    </div>
   );
 };
 

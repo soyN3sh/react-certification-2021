@@ -3,7 +3,7 @@ import { render } from '@testing-library/react';
 import { renderHook } from '@testing-library/react-hooks';
 import GlobalContext from '../providers/Global/GlobalContext';
 import useData from '../utils/hooks/useData';
-import StyledVideoDetail from '../pages/VideoDetail/VideoDetail.page';
+import FavoriteVideoDetail from '../pages/FavoriteVideoDetail/FavoriteVideoDetail.component';
 
 const mockDataFetch = {
   items: [
@@ -47,11 +47,9 @@ const mockFetch = (mockData) => {
   );
 };
 
-const endpoint = 'search';
+const endpoint = 'videos';
 const apiParams = {
-  relatedToVideoId: 'nmXMgqjQzls',
-  maxResults: 25,
-  type: 'video',
+  id: 'nmXMgqjQzls',
 };
 
 const mockFetchCleanUp = () => {
@@ -73,20 +71,21 @@ const initialState = {
     user: {
       authenticated: false,
     },
+    favoriteVideos: [],
   },
   dispatch: jest.fn(),
 };
 
-const VideoDetailWithContext = ({ state }) => {
+const FavoriteVideoDetailWithContext = ({ state }) => {
   return (
     <GlobalContext.Provider value={{ ...state }}>
-      <StyledVideoDetail />
+      <FavoriteVideoDetail />
     </GlobalContext.Provider>
   );
 };
 
 it('renders title for selected video and async data for related videos', async () => {
-  render(<VideoDetailWithContext state={initialState} />);
+  render(<FavoriteVideoDetailWithContext state={initialState} />);
 
   mockFetch(mockDataFetch);
   const { result, waitForNextUpdate } = renderHook(() => useData(endpoint, apiParams));

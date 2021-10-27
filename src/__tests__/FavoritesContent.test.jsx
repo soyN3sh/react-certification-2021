@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import GlobalContext from '../providers/Global/GlobalContext';
-import Content from '../components/Content/Content.component';
+import FavoritesContent from '../components/FavoritesContent/FavoritesContent.component';
 
 const testData = [
   {
@@ -51,7 +51,7 @@ const testData = [
   },
 ];
 
-describe('Content tests', () => {
+describe('FavoritesContent tests', () => {
   const initialState = {
     state: {
       user: {
@@ -61,17 +61,17 @@ describe('Content tests', () => {
     dispatch: jest.fn(),
   };
 
-  const ContentWithContext = ({ state }) => {
+  const FavoritesContentWithContext = ({ state }) => {
     return (
       <GlobalContext.Provider value={{ ...state }}>
-        <Content data={testData} />
+        <FavoritesContent data={testData} />
       </GlobalContext.Provider>
     );
   };
 
-  it('Content renders correctly', () => {
+  it('FavoritesContent renders correctly', () => {
     const state = initialState;
-    render(<ContentWithContext state={state} />);
+    render(<FavoritesContentWithContext state={state} />);
 
     expect(
       screen.getByText('I Went To the Wrong Hood In Mexico City 🇲🇽')

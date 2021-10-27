@@ -10,6 +10,7 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^10.4.9",
     "@testing-library/user-event": "^12.1.3",
+    "jest-environment-jsdom-sixteen": "^2.0.0",
     "jsx-runtime": "^1.2.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -24,7 +25,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --env=jest-environment-jsdom-sixteen",
     "eject": "react-scripts eject",
     "lint": "eslint ./src --ext .js,.jsx",
     "lint:fix": "eslint ./src --ext .js,.jsx --fix"
@@ -70,13 +71,9 @@
   },
   "jest": {
     "coveragePathIgnorePatterns": [
-      "src/components/Private",
       "/src/components/Fortune",
       "/src/pages/Login",
-      "/src/pages/NotFound",
       "src/pages/Secret",
-      "src/providers/Auth",
-      "src/utils/storage.js",
       "src/utils/hooks/useFortune.js"
     ]
   }
