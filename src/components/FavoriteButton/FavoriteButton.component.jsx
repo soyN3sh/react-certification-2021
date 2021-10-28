@@ -23,7 +23,7 @@ const FavoriteButton = ({ video }) => {
       {user.authenticated &&
         (isFavoriteVideo() ? (
           <IconButton
-            data-testid="favButton"
+            data-testid="removefavButton"
             size="large"
             edge="end"
             aria-label="favorite button"
@@ -49,7 +49,7 @@ const FavoriteButton = ({ video }) => {
           </IconButton>
         ) : (
           <IconButton
-            data-testid="favButton"
+            data-testid="addFavButton"
             size="large"
             edge="end"
             aria-label="favorite button"

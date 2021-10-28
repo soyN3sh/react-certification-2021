@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import RelatedVideo from '../components/RelatedVideo/RelatedVideo.component';
+import FavoriterRelatedVideo from '../components/FavoriteRelatedVideo/FavoriteRelatedVideo.component';
 
 const mockHistoryPush = jest.fn();
 
@@ -44,22 +44,26 @@ const testVideo = {
   },
 };
 
-describe('RelatedVideo tests', () => {
-  it('RelatedVideo renders correctly', () => {
-    render(<RelatedVideo video={testVideo} />);
+describe('FavoriterRelatedVideo tests', () => {
+  it('FavoriterRelatedVideo renders correctly', () => {
+    render(<FavoriterRelatedVideo video={testVideo} />);
 
-    const relatedVideo = screen.getByText('Video Tour | Welcome to Wizeline Guadalajara');
+    const favoriterRelatedVideo = screen.getByText(
+      'Video Tour | Welcome to Wizeline Guadalajara'
+    );
 
-    expect(relatedVideo).toBeInTheDocument();
+    expect(favoriterRelatedVideo).toBeInTheDocument();
   });
 
   it('handle click on cardActionArea', () => {
-    render(<RelatedVideo video={testVideo} />);
+    render(<FavoriterRelatedVideo video={testVideo} />);
 
-    const relatedVideo = screen.getByText('Video Tour | Welcome to Wizeline Guadalajara');
+    const favoriterRelatedVideo = screen.getByText(
+      'Video Tour | Welcome to Wizeline Guadalajara'
+    );
 
-    fireEvent.click(relatedVideo);
+    fireEvent.click(favoriterRelatedVideo);
 
-    expect(mockHistoryPush).toHaveBeenCalledWith(`/video-detail/${testVideo.id}`);
+    expect(mockHistoryPush).toHaveBeenCalledWith(`/favorites/${testVideo.id}`);
   });
 });

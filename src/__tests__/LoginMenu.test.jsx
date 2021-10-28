@@ -12,6 +12,7 @@ describe('LoginMenu tests', () => {
         authenticated: false,
       },
       isProfileMenuOpen: true,
+      isLoginDialogOpen: false,
       anchorEl: myDiv,
     },
     dispatch: jest.fn(),

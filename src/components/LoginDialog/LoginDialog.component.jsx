@@ -16,7 +16,7 @@ import { actions } from '../../utils/reducer/actions';
 import loginApi from '../../utils/login.api';
 import { storage } from '../../utils/storage';
 
-const LoginForm = () => {
+const LoginDialog = () => {
   const {
     state: { isLoginDialogOpen },
     dispatch,
@@ -56,7 +56,7 @@ const LoginForm = () => {
 
   return (
     <div>
-      <Dialog open={isLoginDialogOpen} onClose={handleFormClose}>
+      <Dialog id="loginDialog" open={isLoginDialogOpen} onClose={handleFormClose}>
         <DialogTitle>Login</DialogTitle>
         <DialogContent>
           {error !== '' ? <Alert severity="error">{error}</Alert> : null}
@@ -102,10 +102,10 @@ const LoginForm = () => {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleFormClose} disabled={loading}>
+          <Button id="cancelButton" onClick={handleFormClose} disabled={loading}>
             Cancel
           </Button>
-          <Button onClick={authenticateUser} disabled={loading}>
+          <Button id="loginButton" onClick={authenticateUser} disabled={loading}>
             {loading ? 'Logging in...' : 'Login'}
           </Button>
         </DialogActions>
@@ -114,4 +114,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default LoginDialog;

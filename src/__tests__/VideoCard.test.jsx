@@ -15,10 +15,7 @@ jest.mock('react-router', () => ({
 const testData = {
   kind: 'youtube#searchResult',
   etag: 'uyV-xf8yG6xa2tQKagAt55iBXnw',
-  id: {
-    kind: 'youtube#video',
-    videoId: 'nmXMgqjQzls',
-  },
+  id: 'nmXMgqjQzls',
   snippet: {
     publishedAt: '2019-09-30T23:54:32Z',
     channelId: 'UCPGzT4wecuWM0BH9mPiulXg',
@@ -82,7 +79,7 @@ describe('VideoCard tests', () => {
 
     fireEvent.click(videoCard);
 
-    expect(mockHistoryPush).toHaveBeenCalledWith(`/video-detail/${testData.id.videoId}`);
+    expect(mockHistoryPush).toHaveBeenCalledWith(`/video-detail/${testData.id}`);
   });
 
   it('handle mouse enter on cardActionArea', async () => {
@@ -101,7 +98,7 @@ describe('VideoCard tests', () => {
 
     fireEvent.mouseEnter(videoCard);
 
-    expect(screen.getByTestId('favButton')).toBeInTheDocument();
+    expect(screen.getByTestId('addFavButton')).toBeInTheDocument();
 
     fireEvent.mouseLeave(videoCard);
 
