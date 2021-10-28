@@ -13,6 +13,7 @@ function App() {
   const [state, dispatch] = useReducer(reducer, {
     favoriteVideos: storage.get('favoriteVideos') || [],
     user: storage.get('user') || { authenticated: false },
+    showButton: false,
     anchorEl: null,
     isProfileMenuOpen: false,
     isLoginDialogOpen: false,

@@ -8,7 +8,7 @@ const FavoriteRelatedVideo = ({ video }) => {
   const history = useHistory();
 
   const handleClick = () => {
-    history.push(`/favorites/${video.id.videoId ? video.id.videoId : video.id}`);
+    history.push(`/favorites/${video.id}`);
   };
   return (
     <Card

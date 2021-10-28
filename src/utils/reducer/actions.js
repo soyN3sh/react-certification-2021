@@ -1,8 +1,6 @@
 export const actions = {
   addFavoriteVideo: 'addFavoriteVideo',
   removeFavoriteVideo: 'removeFavoriteVideo',
-  addFavoriteVideoWithIcon: 'addFavoriteVideoWithIcon',
-  removeFavoriteVideoWithIcon: 'removeFavoriteVideoWithIcon',
   setQuery: 'setQuery',
   setApiParams: 'setApiParams',
   setAnchorEl: 'setAnchorEl',

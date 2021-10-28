@@ -14,7 +14,7 @@ const FavoriteButton = ({ video }) => {
 
   const isFavoriteVideo = () => {
     return favoriteVideos.find((favoriteVideo) => {
-      return favoriteVideo.id.videoId === video.id.videoId;
+      return favoriteVideo.id === video.id;
     });
   };
 
@@ -36,12 +36,12 @@ const FavoriteButton = ({ video }) => {
             onClick={async () => {
               const tmpFavoriteVideos = storage.get('favoriteVideos');
               dispatch({
-                type: actions.removeFavoriteVideoWithIcon,
+                type: actions.removeFavoriteVideo,
                 payload: video,
               });
               storage.set(
                 'favoriteVideos',
-                tmpFavoriteVideos.filter((item) => item.id.videoId !== video.id.videoId)
+                tmpFavoriteVideos.filter((item) => item.id !== video.id)
               );
             }}
           >
@@ -61,7 +61,7 @@ const FavoriteButton = ({ video }) => {
             }}
             onClick={async () => {
               dispatch({
-                type: actions.addFavoriteVideoWithIcon,
+                type: actions.addFavoriteVideo,
                 payload: video,
               });
               storage.set('favoriteVideos', [...favoriteVideos, video]);

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Card, CardActionArea, CardMedia, CardContent, Typography } from '@mui/material';
 import { useHistory } from 'react-router';
 import FavoriteButton from '../FavoriteButton/FavoriteButton.component';
@@ -11,13 +11,13 @@ const VideoCard = ({ data }) => {
 
   const { thumbnails, title, description } = data.snippet;
 
+  const [showButton, setShowButton] = useState(false);
+
   const history = useHistory();
 
   const handleClick = () => {
-    history.push(`/video-detail/${data.id.videoId}`);
+    history.push(`/video-detail/${data.id}`);
   };
-
-  const [showButton, setShowButton] = useState(false);
 
   const handleMouseEnter = (e) => {
     e.preventDefault();

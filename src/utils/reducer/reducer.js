@@ -11,16 +11,6 @@ export const reducer = (state, action) => {
           return video.id !== action.payload.id;
         }),
       };
-    case actions.addFavoriteVideoWithIcon:
-      return { ...state, favoriteVideos: [...state.favoriteVideos, action.payload] };
-    case actions.removeFavoriteVideoWithIcon:
-      return {
-        ...state,
-        favoriteVideos: state.favoriteVideos.filter(
-          (video) => video.id.videoId !== action.payload.id.videoId
-        ),
-      };
-
     case actions.setQuery:
       return { ...state, apiParams: { ...state.apiParams, q: action.payload } };
     case actions.setApiParams:

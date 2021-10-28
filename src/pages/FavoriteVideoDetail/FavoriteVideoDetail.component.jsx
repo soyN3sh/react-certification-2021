@@ -24,9 +24,6 @@ const FavoriteVideoDetail = () => {
 
   const isFavoriteVideo = (video) => {
     return favoriteVideos.find((favoriteVideo) => {
-      if (favoriteVideo.id.videoId) {
-        return favoriteVideo.id.videoId === video.id;
-      }
       return favoriteVideo.id === video.id;
     });
   };
@@ -70,10 +67,8 @@ const FavoriteVideoDetail = () => {
                     });
                     storage.set(
                       'favoriteVideos',
-                      tmpFavoriteVideos.filter((video) =>
-                        video.id.videoId
-                          ? video.id.videoId
-                          : video.id !== infoVideo.data[0].id
+                      tmpFavoriteVideos.filter(
+                        (video) => video.id !== infoVideo.data[0].id
                       )
                     );
                   }}

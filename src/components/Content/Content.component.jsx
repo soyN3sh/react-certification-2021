@@ -14,7 +14,7 @@ const Content = ({ data }) => {
       sx={{ padding: '12px' }}
     >
       {data.map((item) => (
-        <Grid item key={item.id.videoId}>
+        <Grid item key={item.id}>
           <VideoCard data={item} />
         </Grid>
       ))}

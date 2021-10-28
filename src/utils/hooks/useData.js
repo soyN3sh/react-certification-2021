@@ -13,6 +13,12 @@ const useData = (endpoint, params) => {
         const response = await fetch(YOUTUBE_API_URL);
         const { items } = await response.json();
 
+        items.forEach((item) => {
+          if (item.id.videoId) {
+            item.id = item.id.videoId; // eslint-disable-line no-param-reassign
+          }
+        });
+
         setData(items);
         setLoading(false);
       } catch (error) {
