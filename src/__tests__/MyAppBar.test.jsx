@@ -11,6 +11,11 @@ describe('MyAppBar tests', () => {
       apiParams: {
         q: 'wizeline',
       },
+      user: {
+        authenticated: false,
+      },
+      isProfileMenuOpen: false,
+      anchorEl: null,
     },
     dispatch: jest.fn(),
   };

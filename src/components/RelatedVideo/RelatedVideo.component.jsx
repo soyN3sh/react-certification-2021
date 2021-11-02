@@ -8,7 +8,7 @@ const RelatedVideo = ({ video }) => {
   const history = useHistory();
 
   const handleClick = () => {
-    history.push(`/video-detail/${video.id.videoId}`);
+    history.push(`/video-detail/${video.id}`);
   };
 
   return (

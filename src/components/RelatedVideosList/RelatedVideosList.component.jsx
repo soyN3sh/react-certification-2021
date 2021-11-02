@@ -20,7 +20,7 @@ const RelatedVideosList = ({ data }) => {
       }}
     >
       {filteredData.map((video) => (
-        <Grid item key={video.id.videoId}>
+        <Grid item key={video.id}>
           <RelatedVideo video={video} />
         </Grid>
       ))}

@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Route, Redirect } from 'react-router-dom';
-
-import { useAuth } from '../../providers/Auth';
+import GlobalContext from '../../providers/Global/GlobalContext';
 
 function Private({ ...rest }) {
-  const { authenticated } = useAuth();
+  const {
+    state: { user },
+  } = useContext(GlobalContext);
 
-  return authenticated ? <Route {...rest} /> : <Redirect to="/" />;
+  return user.authenticated ? <Route {...rest} /> : <Redirect to="/" />;
 }
 
 export default Private;

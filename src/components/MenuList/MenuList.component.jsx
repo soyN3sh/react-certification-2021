@@ -6,13 +6,16 @@ import { actions } from '../../utils/reducer/actions';
 import routesList from '../../routes/routesList';
 
 const MenuList = () => {
-  const { dispatch } = useContext(GlobalContext);
+  const {
+    state: { user },
+    dispatch,
+  } = useContext(GlobalContext);
 
   const validateRoute = (route) => {
     if (route.listed && route.private) {
-      // if (user.isAuthenticated) {
-      //   return route;
-      // }
+      if (user.authenticated) {
+        return route;
+      }
     } else if (route.listed && !route.private) {
       return route;
     }
@@ -35,7 +38,7 @@ const MenuList = () => {
     <Box sx={{ width: '250px' }} role="presentation">
       <List>
         {filteredRoutes.map((route) => {
-          const Component = route.icon;
+          const IconComponent = route.icon;
 
           return (
             <ListItem
@@ -47,7 +50,7 @@ const MenuList = () => {
             >
               <ListItemText primary={route.name} />
               <ListItemIcon>
-                <Component />
+                <IconComponent />
               </ListItemIcon>
             </ListItem>
           );

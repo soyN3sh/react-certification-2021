@@ -1,5 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
+import GlobalContext from '../providers/Global/GlobalContext';
 import Content from '../components/Content/Content.component';
 
 const testData = [
@@ -50,10 +51,30 @@ const testData = [
   },
 ];
 
-it('Content renders correctly', () => {
-  render(<Content data={testData} />);
+describe('Content tests', () => {
+  const initialState = {
+    state: {
+      user: {
+        authenticated: false,
+      },
+    },
+    dispatch: jest.fn(),
+  };
 
-  expect(
-    screen.getByText('I Went To the Wrong Hood In Mexico City 🇲🇽')
-  ).toBeInTheDocument();
+  const ContentWithContext = ({ state }) => {
+    return (
+      <GlobalContext.Provider value={{ ...state }}>
+        <Content data={testData} />
+      </GlobalContext.Provider>
+    );
+  };
+
+  it('Content renders correctly', () => {
+    const state = initialState;
+    render(<ContentWithContext state={state} />);
+
+    expect(
+      screen.getByText('I Went To the Wrong Hood In Mexico City 🇲🇽')
+    ).toBeInTheDocument();
+  });
 });

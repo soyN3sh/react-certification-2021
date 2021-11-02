@@ -16,6 +16,9 @@ jest.mock('react-router', () => ({
 describe('MenuList tests', () => {
   const initialState = {
     state: {
+      user: {
+        authenticated: false,
+      },
       isDrawerOpen: false,
     },
   };

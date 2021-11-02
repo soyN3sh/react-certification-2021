@@ -1,6 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import { renderHook } from '@testing-library/react-hooks';
+import GlobalContext from '../providers/Global/GlobalContext';
 import useData from '../utils/hooks/useData';
 import StyledVideoDetail from '../pages/VideoDetail/VideoDetail.page';
 
@@ -67,8 +68,25 @@ jest.mock('react-router', () => ({
   }),
 }));
 
+const initialState = {
+  state: {
+    user: {
+      authenticated: false,
+    },
+  },
+  dispatch: jest.fn(),
+};
+
+const VideoDetailWithContext = ({ state }) => {
+  return (
+    <GlobalContext.Provider value={{ ...state }}>
+      <StyledVideoDetail />
+    </GlobalContext.Provider>
+  );
+};
+
 it('renders title for selected video and async data for related videos', async () => {
-  render(<StyledVideoDetail />);
+  render(<VideoDetailWithContext state={initialState} />);
 
   mockFetch(mockDataFetch);
   const { result, waitForNextUpdate } = renderHook(() => useData(endpoint, apiParams));

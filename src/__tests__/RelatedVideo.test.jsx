@@ -14,10 +14,7 @@ jest.mock('react-router', () => ({
 const testVideo = {
   kind: 'youtube#searchResult',
   etag: 'uyV-xf8yG6xa2tQKagAt55iBXnw',
-  id: {
-    kind: 'youtube#video',
-    videoId: 'nmXMgqjQzls',
-  },
+  id: 'nmXMgqjQzls',
   snippet: {
     publishedAt: '2019-09-30T23:54:32Z',
     channelId: 'UCPGzT4wecuWM0BH9mPiulXg',
@@ -63,6 +60,6 @@ describe('RelatedVideo tests', () => {
 
     fireEvent.click(relatedVideo);
 
-    expect(mockHistoryPush).toHaveBeenCalledWith(`/video-detail/${testVideo.id.videoId}`);
+    expect(mockHistoryPush).toHaveBeenCalledWith(`/video-detail/${testVideo.id}`);
   });
 });

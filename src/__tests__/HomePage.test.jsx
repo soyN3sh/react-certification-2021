@@ -51,6 +51,9 @@ const initialState = {
     apiParams: {
       q: 'wizeline',
     },
+    user: {
+      authenticated: false,
+    },
   },
   dispatch: jest.fn(),
 };
@@ -75,6 +78,7 @@ describe('HomePage resolve tests', () => {
     await act(async () => {
       render(<HomePageWithContext data={fakeVideo} state={initialState} />);
     });
+
     expect(
       screen.getByText('Video Tour | Welcome to Wizeline Guadalajara')
     ).toBeInTheDocument();
