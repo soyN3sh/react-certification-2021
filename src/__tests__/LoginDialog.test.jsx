@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent, waitFor, act } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 import GlobalContext from '../providers/Global/GlobalContext';
 import LoginDialog from '../components/LoginDialog/LoginDialog.component';
 import { actions } from '../utils/reducer/actions';

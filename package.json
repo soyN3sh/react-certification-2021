@@ -71,6 +71,7 @@
   },
   "jest": {
     "coveragePathIgnorePatterns": [
+      "/src/components/Private",
       "/src/components/Fortune",
       "/src/pages/Login",
       "src/pages/Secret",
